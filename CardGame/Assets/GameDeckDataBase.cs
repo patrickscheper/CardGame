@@ -1,6 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
+using UnityEngine;
+
+public class GameDeckDataBase : MonoBehaviour
+{
+    public List<Card> cardDeckNormal = new List<Card>();
+    public List<Card> cardDeckRare = new List<Card>();
+    public List<Card> cardDeckEpic = new List<Card>();
+}
 
 [System.Serializable]
 public struct Card
@@ -13,10 +20,4 @@ public struct Card
     public int cardDefence;
 }
 
-public static class GameDeck {
 
-
-    public List<Card> cardDeck = new List<Card>();
-
-
-}

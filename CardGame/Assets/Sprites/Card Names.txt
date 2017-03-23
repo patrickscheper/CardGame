@@ -1,0 +1,30 @@
+Normal:
+Trooper
+Guard
+Pilot
+O-Wing Fighter
+Battle Tank
+Starfighter
+Droid Medic
+Flash Speeder
+
+
+Rare:
+Captain
+Spy
+Imperial Trooper
+Imperial Gaurd
+Imperial Pilot
+Cruiser
+Royal Starship
+
+
+
+
+Epic:
+Owen Lars
+Dice Ibegon
+Colonel Wullf
+Dr. Evazan
+Muscat Cometblast
+Hence Amavof
