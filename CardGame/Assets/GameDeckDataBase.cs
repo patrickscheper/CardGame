@@ -10,8 +10,11 @@ public class GameDeckDataBase : MonoBehaviour
 }
 
 [System.Serializable]
-public struct Card
+public class Card
 {
+    public bool isDeck;
+    public GameObject cardObject;
+    public int copiesInDeck = 0;
     public Sprite cardImage;
     public Sprite cardCategory;
     public string cardTitle;
