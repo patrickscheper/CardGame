@@ -14,6 +14,11 @@ public class MenuOperator : MonoBehaviour
 
     // Use this for initialization
 
+    private void Awake()
+    {
+        myDeckCanvas.SetActive(true);
+        StoreCanvas.SetActive(false);
+    }
 
 
     void Update()
@@ -27,7 +32,6 @@ public class MenuOperator : MonoBehaviour
         {
             myDeckCanvas.SetActive(i);
             StoreCanvas.SetActive(!i);
-
             return;
         }
         myDeckCanvas.SetActive(i);

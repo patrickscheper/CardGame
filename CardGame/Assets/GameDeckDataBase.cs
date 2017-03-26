@@ -12,6 +12,9 @@ public class GameDeckDataBase : MonoBehaviour
 [System.Serializable]
 public class Card
 {
+    public enum cardType { bronze, rare, epic };
+    public cardType cardTypes;
+
     public bool isDeck;
     public GameObject cardObject;
     public int copiesInDeck = 0;

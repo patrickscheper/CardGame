@@ -5,199 +5,65 @@ using UnityEngine.UI;
 
 public class StoreOperator : MonoBehaviour {
 
-    public int points;
+    public int gems;
 
-    public Text pointText;
+    public Text currentGemsText;
 
-    public GameDeckDataBase dataBase;
-    public GameDeckOperator deckOperator;
+    public GameObject boosterpackPanel;
 
-    public GameObject spawnStart;
-    public GameObject[] spawnPoints;
-    public GameObject spawnEnd;
-
-    public List<Card> cardDeck = new List<Card>();
-    public GameObject cardPrefab;
-
-    public List<Card> currentBPack = new List<Card>();
-    public List<GameObject> boosterCards = new List<GameObject>();  
-
-    public int normalDeck;
-    public int rareDeck;
-    public int epicDeck;
-
-    public bool goToSpawnPoints;
-    public bool goToSpawnEnd;
-
-    void Awake()
-    {
-        
-        normalDeck = dataBase.cardDeckNormal.Count;
-        rareDeck = dataBase.cardDeckRare.Count;
-        epicDeck = dataBase.cardDeckEpic.Count;
-    }
-
+    public GameObject bronzepack;
+    public GameObject rarepack;
+    public GameObject epicpack;
 
 
     void Update ()
     {
-        pointText.text = "Current Points: " + points.ToString();
-
-        if (goToSpawnPoints)
-        {
-
-        }
+        currentGemsText.text = "Current Gems: " + gems.ToString();
 
 
 
 	}
 
-    void BuyBronze()
+
+
+
+    public void BuyBronze()
     {
-        currentBPack.Add(dataBase.cardDeckNormal[randomNumber(0, normalDeck)]);
-        currentBPack.Add(dataBase.cardDeckNormal[randomNumber(0, normalDeck)]);
-        currentBPack.Add(dataBase.cardDeckNormal[randomNumber(0, normalDeck)]);
-        currentBPack.Add(dataBase.cardDeckRare[randomNumber(0, rareDeck)]);
-        currentBPack.Add(dataBase.cardDeckEpic[randomNumber(0, epicDeck)]);
-
-        for (int i = 0; i < currentBPack.Count; i++)
+        if (gems >= 50)
         {
-            GameObject newCard = Instantiate(cardPrefab, transform.position, transform.rotation);
-            newCard.transform.SetParent(transform);
-            newCard.transform.position = 
-            boosterCards.Add(newCard);
+            gems -= 50;
 
-            newCard.transform.Find("cardImage").GetComponent<Image>().sprite = currentBPack[i].cardImage;
-            newCard.transform.Find("cardCategory").GetComponent<Image>().sprite = currentBPack[i].cardCategory;
-            newCard.transform.Find("cardTitle").GetComponent<Text>().text = currentBPack[i].cardTitle;
-            newCard.transform.Find("cardAttack_title").GetComponent<Text>().text = currentBPack[i].cardAttack.ToString();
-            newCard.transform.Find("cardDefence_title").GetComponent<Text>().text = currentBPack[i].cardDefence.ToString();
-            newCard.transform.Find("cardTimes").GetComponent<Text>().text = (currentBPack[i].copiesInDeck).ToString();
-            newCard.transform.Find("cardDescription").GetComponent<Text>().text = currentBPack[i].cardDesciption;
-            currentBPack[i].isDeck = true;
-            currentBPack[i].cardObject = newCard;
-
-
-
+            GameObject newCard = Instantiate(bronzepack, boosterpackPanel.transform.position, boosterpackPanel.transform.rotation);
+            newCard.transform.SetParent(boosterpackPanel.transform);
+            newCard.transform.localScale = new Vector3(1, 1, 1);
+            newCard.GetComponent<BoosterCard>().cardTypes = BoosterCard.cardType.bronze;
         }
-
-        goToSpawnPoints = true;
-
-
-
-
-
-
-
-
-
-
 
     }
 
-
-    public void UpdateCards()
-    {
-        if (cardDeck.Count == 0)
+    public void BuyRare()
+    {if (gems >= 75)
         {
-            cardDeck = currentBPack;
+            gems -= 75;
 
-            foreach (Card item in cardDeck)
-            {
-
-                if (!item.isDeck)
-                {
-
-   
-
-                }
-            }
-
-            currentBPack = new List<Card>();
-            return;
-
+            GameObject newCard = Instantiate(rarepack, boosterpackPanel.transform.position, boosterpackPanel.transform.rotation);
+            newCard.transform.SetParent(boosterpackPanel.transform);
+            newCard.transform.localScale = new Vector3(1, 1, 1);
+            newCard.GetComponent<BoosterCard>().cardTypes = BoosterCard.cardType.rare;
         }
-
-        foreach (Card item in currentBPack)
-        {
-
-            foreach (Card items in cardDeck)
-            {
-
-
-                if (item.cardTitle == items.cardTitle)
-                {
-                    print("This card is the same!");
-
-                    items.copiesInDeck += 1;
-                    items.cardObject.transform.Find("cardTimes").GetComponent<Text>().text = (item.copiesInDeck).ToString();
-
-                }
-                if (item.cardTitle != items.cardTitle)
-                {
-                    print("There's a new card: " + item.cardTitle);
-
-                    GameObject newCard = Instantiate(cardPrefab, transform.position, transform.rotation);
-
-                    newCard.transform.SetParent(transform);
-
-                    newCard.transform.Find("cardImage").GetComponent<Image>().sprite = item.cardImage;
-                    newCard.transform.Find("cardCategory").GetComponent<Image>().sprite = item.cardCategory;
-                    newCard.transform.Find("cardTitle").GetComponent<Text>().text = item.cardTitle;
-                    newCard.transform.Find("cardAttack_title").GetComponent<Text>().text = item.cardAttack.ToString();
-                    newCard.transform.Find("cardDefence_title").GetComponent<Text>().text = item.cardDefence.ToString();
-                    newCard.transform.Find("cardTimes").GetComponent<Text>().text = (item.copiesInDeck).ToString();
-                    newCard.transform.Find("cardDescription").GetComponent<Text>().text = item.cardDesciption;
-                    item.isDeck = true;
-                    item.cardObject = newCard;
-
-                    //add new card
-                }
-
-            }
-
-        }
-
-        currentBPack = new List<Card>();
-
 
     }
 
-    public void GetBronze()
-    {
-
-
-        currentBPack.Add(dataBase.cardDeckNormal[randomNumber(0, normalDeck)]);
-        currentBPack.Add(dataBase.cardDeckNormal[randomNumber(0, normalDeck)]);
-        currentBPack.Add(dataBase.cardDeckNormal[randomNumber(0, normalDeck)]);
-        currentBPack.Add(dataBase.cardDeckRare[randomNumber(0, rareDeck)]);
-        currentBPack.Add(dataBase.cardDeckEpic[randomNumber(0, epicDeck)]);
-
-
-
-
-
-        deckOperator.UpdateCards();
-        //   deckOperator.currentBPack = new List<Card>();
-
-
-    }
-
-    int randomNumber(int i, int b)
-    {
-        return Random.Range(i, b);
-
-    }
-
-    IEnumerator MoveToPosition(Vector3 newPosition, float time)
-    {
-        float elapsedTime = 0;
-        Vector3 startingPos = spawnStart.transform.position;
-        while (elapsedTime < time)
+    public void BuyEpic()
+    {if (gems >= 100)
         {
-            transform.position = Vector3.Lerp(startingPos, newPosition, (elapsedTime / time));
-            elapsedTime += Time.deltaTime;
-            yield return null;
+            gems -= 100;
+
+            GameObject newCard = Instantiate(epicpack, boosterpackPanel.transform.position, boosterpackPanel.transform.rotation);
+            newCard.transform.SetParent(boosterpackPanel.transform);
+            newCard.transform.localScale = new Vector3(1, 1, 1);
+            newCard.GetComponent<BoosterCard>().cardTypes = BoosterCard.cardType.epic;
         }
+
     }
 }
