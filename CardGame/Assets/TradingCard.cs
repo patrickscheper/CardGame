@@ -31,22 +31,7 @@ public class TradingCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public void Start()
     {
 
-        if (thisCard.cardTypes == Card.cardType.bronze)
-        {
-            value += Random.Range(3, 6);
-        }
-
-        else if (thisCard.cardTypes == Card.cardType.rare)
-        {
-            value += Random.Range(6, 14);
-        }
-
-        else if (thisCard.cardTypes == Card.cardType.epic)
-        {
-            value += Random.Range(14, 25);
-        }
-
-        valueText.text = value.ToString();
+        valueText.text = thisCard.value.ToString();
 
     }
 
@@ -99,7 +84,7 @@ public class TradingCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         {
             rotate = true;
             dropArea.AddBool(currentCard);
-
+            isInStore = false;
 
 
         }
@@ -122,7 +107,7 @@ public class TradingCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void SellCard()
     {
-        storeOperator.gems += value;
+        storeOperator.gems += thisCard.value;
 
         transform.parent.GetComponent<GameDeckOperator>().cardDeck.Remove(thisCard);
         transform.parent.GetComponent<GameDeckOperator>().cardDeckGO.Remove(gameObject);

@@ -41,7 +41,7 @@ public class StoreOperator : MonoBehaviour {
 
     }
 
-    public void BuyRare()
+    public void BuySilver()
     {if (gems >= 75)
         {
             gems -= 75;
@@ -49,12 +49,12 @@ public class StoreOperator : MonoBehaviour {
             GameObject newCard = Instantiate(rarepack, boosterpackPanel.transform.position, boosterpackPanel.transform.rotation);
             newCard.transform.SetParent(boosterpackPanel.transform);
             newCard.transform.localScale = new Vector3(1, 1, 1);
-            newCard.GetComponent<BoosterCard>().cardTypes = BoosterCard.cardType.rare;
+            newCard.GetComponent<BoosterCard>().cardTypes = BoosterCard.cardType.silver;
         }
 
     }
 
-    public void BuyEpic()
+    public void BuyGold()
     {if (gems >= 100)
         {
             gems -= 100;
@@ -62,7 +62,7 @@ public class StoreOperator : MonoBehaviour {
             GameObject newCard = Instantiate(epicpack, boosterpackPanel.transform.position, boosterpackPanel.transform.rotation);
             newCard.transform.SetParent(boosterpackPanel.transform);
             newCard.transform.localScale = new Vector3(1, 1, 1);
-            newCard.GetComponent<BoosterCard>().cardTypes = BoosterCard.cardType.epic;
+            newCard.GetComponent<BoosterCard>().cardTypes = BoosterCard.cardType.gold;
         }
 
     }

@@ -54,7 +54,7 @@ public class DropArea : MonoBehaviour, IDropHandler
             Destroy(d.gameObject);
         }
 
-        if (d != null && d.cardTypes == BoosterCard.cardType.rare)
+        if (d != null && d.cardTypes == BoosterCard.cardType.silver)
         {
             //do soemthing bronze
             //destroy card
@@ -63,7 +63,7 @@ public class DropArea : MonoBehaviour, IDropHandler
             Destroy(d.gameObject);
         }
 
-        if (d != null && d.cardTypes == BoosterCard.cardType.epic)
+        if (d != null && d.cardTypes == BoosterCard.cardType.gold)
         {
             //do soemthing bronze
             //destroy card
@@ -81,7 +81,7 @@ public class DropArea : MonoBehaviour, IDropHandler
         for (int i = 0; i < readyCards.Length; i++)
         {
             if (!readyCards[i])
-            { 
+            {
                 return; //this "quits" the for loop, you don't need to check the rest of the items if you already found one that's not active
             }
         }
@@ -104,26 +104,26 @@ public class DropArea : MonoBehaviour, IDropHandler
 
     public void Update()
     {
- 
+
         if (goToSpawnPoints)
         {
             t += 0.9f * Time.deltaTime;
 
-          //  Test();
+            //  Test();
 
-           currentCard[0].transform.position = Vector3.Lerp(spawnStart.transform.position, spawnPoints[0].transform.position, t);
+            currentCard[0].transform.position = Vector3.Lerp(spawnStart.transform.position, spawnPoints[0].transform.position, t);
 
-           currentCard[1].transform.position = Vector3.Lerp(spawnStart.transform.position, spawnPoints[1].transform.position, t);
+            currentCard[1].transform.position = Vector3.Lerp(spawnStart.transform.position, spawnPoints[1].transform.position, t);
 
-           currentCard[2].transform.position = Vector3.Lerp(spawnStart.transform.position, spawnPoints[2].transform.position, t);
+            currentCard[2].transform.position = Vector3.Lerp(spawnStart.transform.position, spawnPoints[2].transform.position, t);
 
-           currentCard[3].transform.position = Vector3.Lerp(spawnStart.transform.position, spawnPoints[3].transform.position, t);
+            currentCard[3].transform.position = Vector3.Lerp(spawnStart.transform.position, spawnPoints[3].transform.position, t);
 
             currentCard[4].transform.position = Vector3.Lerp(spawnStart.transform.position, spawnPoints[4].transform.position, t);
 
-/*
-        
-            */
+            /*
+
+                        */
 
         }
 
@@ -206,7 +206,7 @@ public class DropArea : MonoBehaviour, IDropHandler
 
     void ShowDone()
     {
-     
+
         if (b)
         {
 
@@ -225,7 +225,7 @@ public class DropArea : MonoBehaviour, IDropHandler
 
                 card.transform.SetParent(myDeck.transform);
                 card.GetComponent<TradingCard>().isInDeck = true;
-                                myDeck.GetComponent<GameDeckOperator>().cardDeckGO.Add(card);
+                myDeck.GetComponent<GameDeckOperator>().cardDeckGO.Add(card);
                 myDeck.GetComponent<GameDeckOperator>().cardDeck.Add(card.GetComponent<TradingCard>().thisCard);
 
 
@@ -258,11 +258,11 @@ public class DropArea : MonoBehaviour, IDropHandler
             newCard.GetComponent<TradingCard>().thisCard = currentBPack[i];
             newCard.transform.SetParent(transform, false);
             newCard.transform.position = spawnStart.transform.position;
-            newCard.transform.rotation = new Quaternion(0, 180, 0,0);
+            newCard.transform.rotation = new Quaternion(0, 180, 0, 0);
             newCard.GetComponent<TradingCard>().isInStore = true;
 
             newCard.transform.Find("frontCard/cardImage").GetComponent<Image>().sprite = currentBPack[i].cardImage;
-            newCard.transform.Find("frontCard/cardCategory").GetComponent<Image>().sprite = currentBPack[i].cardCategory;
+
             newCard.transform.Find("frontCard/cardTitle").GetComponent<Text>().text = currentBPack[i].cardTitle;
             newCard.transform.Find("frontCard/cardAttack_title").GetComponent<Text>().text = currentBPack[i].cardAttack.ToString();
             newCard.transform.Find("frontCard/cardDefence_title").GetComponent<Text>().text = currentBPack[i].cardDefence.ToString();
@@ -272,6 +272,16 @@ public class DropArea : MonoBehaviour, IDropHandler
             currentBPack[i].cardObject = newCard;
 
             currentCard[i] = newCard;
+            if (newCard.GetComponent<TradingCard>().thisCard.cardTypes == Card.cardType.normal)
+                newCard.transform.Find("frontCard/cardCategory").GetComponent<Image>().sprite = dataBase.categoryNormal;
+
+            else if (newCard.GetComponent<TradingCard>().thisCard.cardTypes == Card.cardType.rare)
+                newCard.transform.Find("frontCard/cardCategory").GetComponent<Image>().sprite = dataBase.categoryRare;
+
+            else if (newCard.GetComponent<TradingCard>().thisCard.cardTypes == Card.cardType.epic) 
+            newCard.transform.Find("frontCard/cardCategory").GetComponent<Image>().sprite = dataBase.categoryEpic;
+
+    
 
         }
 
@@ -315,8 +325,10 @@ public class DropArea : MonoBehaviour, IDropHandler
             newCard.transform.rotation = new Quaternion(0, 180, 0, 0);
             newCard.GetComponent<TradingCard>().isInStore = true;
 
+
             newCard.transform.Find("frontCard/cardImage").GetComponent<Image>().sprite = currentBPack[i].cardImage;
-            newCard.transform.Find("frontCard/cardCategory").GetComponent<Image>().sprite = currentBPack[i].cardCategory;
+
+
             newCard.transform.Find("frontCard/cardTitle").GetComponent<Text>().text = currentBPack[i].cardTitle;
             newCard.transform.Find("frontCard/cardAttack_title").GetComponent<Text>().text = currentBPack[i].cardAttack.ToString();
             newCard.transform.Find("frontCard/cardDefence_title").GetComponent<Text>().text = currentBPack[i].cardDefence.ToString();
@@ -327,6 +339,14 @@ public class DropArea : MonoBehaviour, IDropHandler
 
             currentCard[i] = newCard;
 
+            if (newCard.GetComponent<TradingCard>().thisCard.cardTypes == Card.cardType.normal)
+                newCard.transform.Find("frontCard/cardCategory").GetComponent<Image>().sprite = dataBase.categoryNormal;
+
+            else if (newCard.GetComponent<TradingCard>().thisCard.cardTypes == Card.cardType.rare) 
+                newCard.transform.Find("frontCard/cardCategory").GetComponent<Image>().sprite = dataBase.categoryRare;
+
+            else if (newCard.GetComponent<TradingCard>().thisCard.cardTypes == Card.cardType.epic) 
+            newCard.transform.Find("frontCard/cardCategory").GetComponent<Image>().sprite = dataBase.categoryEpic;
         }
 
         Invoke("ShowDone", .5f);
@@ -370,7 +390,8 @@ public class DropArea : MonoBehaviour, IDropHandler
             newCard.GetComponent<TradingCard>().isInStore = true;
 
             newCard.transform.Find("frontCard/cardImage").GetComponent<Image>().sprite = currentBPack[i].cardImage;
-            newCard.transform.Find("frontCard/cardCategory").GetComponent<Image>().sprite = currentBPack[i].cardCategory;
+
+     
             newCard.transform.Find("frontCard/cardTitle").GetComponent<Text>().text = currentBPack[i].cardTitle;
             newCard.transform.Find("frontCard/cardAttack_title").GetComponent<Text>().text = currentBPack[i].cardAttack.ToString();
             newCard.transform.Find("frontCard/cardDefence_title").GetComponent<Text>().text = currentBPack[i].cardDefence.ToString();
@@ -380,6 +401,14 @@ public class DropArea : MonoBehaviour, IDropHandler
             currentBPack[i].cardObject = newCard;
 
             currentCard[i] = newCard;
+            if (newCard.GetComponent<TradingCard>().thisCard.cardTypes == Card.cardType.normal)
+                newCard.transform.Find("frontCard/cardCategory").GetComponent<Image>().sprite = dataBase.categoryNormal;
+
+            else if (newCard.GetComponent<TradingCard>().thisCard.cardTypes == Card.cardType.rare)
+                newCard.transform.Find("frontCard/cardCategory").GetComponent<Image>().sprite = dataBase.categoryRare;
+
+            else if (newCard.GetComponent<TradingCard>().thisCard.cardTypes == Card.cardType.epic) 
+            newCard.transform.Find("frontCard/cardCategory").GetComponent<Image>().sprite = dataBase.categoryEpic;
 
         }
 

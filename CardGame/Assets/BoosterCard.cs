@@ -7,7 +7,7 @@ public class BoosterCard : MonoBehaviour, IBeginDragHandler ,IDragHandler, IEndD
 
     public Transform parentToReturnTo = null;
     CanvasGroup canvasGroup;
-    public enum cardType{ bronze, rare, epic };
+    public enum cardType{ bronze, silver, gold };
     public cardType cardTypes;
     
 
