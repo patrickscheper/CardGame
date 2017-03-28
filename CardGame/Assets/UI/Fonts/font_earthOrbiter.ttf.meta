@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 747c64fe7c9764147a6a35d68a2e86a8
+timeCreated: 1490708452
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Earth Orbiter
+  fontNames:
+  - Earth Orbiter
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
